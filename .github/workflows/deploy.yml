@@ -1,7 +1,10 @@
-name: CI/CD Pipeline
+name: Cloud-Agile Deployment Pipeline
+
 on:
   push:
     branches:
       - main
+
 env:
   WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+

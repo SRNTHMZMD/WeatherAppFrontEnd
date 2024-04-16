@@ -1,0 +1,18 @@
+jobs:
+  deploy_frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Frontend to AWS S3
+        uses: actions/aws/cli@v2
+        with:
+          args: s3 sync frontend/build/ s3://your-s3-bucket --delete
+
+  deploy_backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Backend to AWS Elastic Beanstalk
+        uses: actions/aws/cli@v2
+        with:
+          args: elasticbeanstalk create-application-version --application-name your-app-name --version-label v1 --source-bundle S3Bucket="your-s3-bucket",S3Key="backend/build.zip" && elasticbeanstalk update-environment --application-name your-app-name --environment-name your-env-name --version-label v1
